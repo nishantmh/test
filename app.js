@@ -39,14 +39,14 @@ var admin = require('./routes/admin');
 var customer = require('./routes/customer');
 var device = require('./routes/device');
 var users = require('./routes/users');
-mongoose.connect('mongodb://localhost/gpstest2');
+mongoose.connect('mongodb://localhost/gpstest123');
 
 var Custobj = mongoose.model('custObj');
 var Custmap_info = mongoose.model('custmap_info');
 var User_info = mongoose.model('user_info');
 
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {
-    mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + "mongodb://localhost/gpstest2";
+    mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + "mongodb://localhost/gpstest123";
 }
 
 var app = express();
