@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <title>My Angular App!</title>
+		    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+			    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+
+    <link href="css/Style.css" rel="stylesheet" />
+    <link href="css/bootstrap-3.3.4-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="css/font-awesome-4.3.0/css/font-awesome.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.js"></script>
+    <script src="css/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+	<script src="/javascripts/jquery.noty.packaged.js"></script>
+	    <script src="/javascripts/angularApp.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.7/angular-messages.min.js"></script>
+
+
+
+</head>
+<body ng-app="flapperNews">
+<div>
+        <div>
+            <ui-view></ui-view>
+        </div>
+    </div>
+
+	 <script type="text/ng-template" id="/register.html">
+  <div class="page-header">
+    <h1>GPS Tracker</h1>
+  </div>
+
+ 
+
+  <form ng-submit="register()"
+    style="margin-top:30px;">
+    <h3>Register</h3>
+
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Username"
+      ng-model="user.username"></input>
+    </div>
+    <div class="form-group">
+      <input type="password"
+      class="form-control"
+      placeholder="Password"
+      ng-model="user.password"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</script>
+
+
+<script type = "text/ng-template" id="/login.html">
+<div class="container-fluid">
+
+
+        <div class="row titleBar">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 text-center">
+                GPS Tracker
+            </div>
+            <div class="col-sm-2 col-xs-2" style="padding-top:4px;text-align:right;">
+                <i class="fa fa-power-off"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-6 col-xs-12 loginContent">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form ng-submit="logIn()">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="E-mail"  type="email" ng-model="user.username" ></input>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password"  type="password"  ng-model="user.password"></input>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+								<button type="submit" class="btn btn-lg bgRColor fColor btn-block">Login</button>
+                                <!--<a href="index.html" class="btn btn-lg bgRColor fColor btn-block">Login</a>-->
+                                <a href="#" style="float:right;">Forgot Password?</a>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	</script>
+	<script type = "text/ng-template" id="/changePass.html">
+<div class="container-fluid">
+
+
+        <div class="row titleBar">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 text-center">
+                GPS Tracker
+            </div>
+            <div class="col-sm-2 col-xs-2" style="padding-top:4px;text-align:right;">
+                <i class="fa fa-power-off"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-6 col-xs-12 loginContent">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Change Password</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form ng-submit="changePass()">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="password"  type="password" ng-model="user.password" ></input>
+                                </div>
+                                
+                               
+								<button type="submit" class="btn btn-lg bgRColor fColor btn-block">Change Password</button>
+                                
+                               
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	</script>
+<script type="text/ng-template" id="/customerHome.html">
+
+    <div class="container-fluid" ng-init="mappedDevices()">
+        <div class="row titleBar">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 text-center">
+                GPS Tracker
+            </div>
+            <div class="col-sm-2 col-xs-2" style="padding-top: 4px; text-align: right;">
+                <i class="fa fa-power-off" ng-click="logOut()"></i>
+            </div>
+        </div>
+        <div class="col-sm-9 col-xs-12 mid no-padding" id = "tabs">
+            <ul class="nav nav-pills tab-pills">
+                <li class="active"><a data-toggle="pill" href="#addVehicle">Add Vehicle</a></li>
+                <li><a data-toggle="pill" href="#addObj">Add Object</a></li>
+                <li><a data-toggle="pill" href="#mapObj" ng-click="getInfo()">Map Object</a></li>
+                <li><a data-toggle="pill" href="#addUser">Add User</a></li>
+                <li><a data-toggle="pill" href="#deall" ng-click="getDevInfo()">De-allocate Device</a></li>
+            </ul>
+
+
+            <div class="tab-content">
+
+                <div id="addVehicle" class="tab-pane fade in active">
+                    <form ng-submit="AddVehicleInfo()">
+                        <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                            <h2 class="fRColor text-center">Add Vehicle</h2>
+                            <hr />
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">Vehicle ID:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="text" class="form-control" ng-model="device.vID" placeholder="Vehicle ID">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="name" class="lblText">Vehicle Registration Number:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="text" class="form-control" ng-model="device.rtoNo" placeholder="Vehicle Registration Number">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">Device ID:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <select class="form-control" id="sel1" ng-model="device.deviceID" ng-options=" item.deviceID for item in devices track by item.deviceID"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Add</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="addObj" class="tab-pane fade">
+                    <form name="addObj" ng-submit="AddObjInfo()">
+                        <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                            <h2 class="fRColor text-center">Add Object</h2>
+                            <hr />
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+
+
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Object ID</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <input type="text" name="objID" class="form-control" ng-model="obj.objId" placeholder="Object ID">
+										 <div ng-messages="addObj.objID.$error">
+									 <div ng-message="required"><font color="red">This field is required</font></div>
+									</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">Object Type</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="text" class="form-control" ng-model="obj.type" placeholder="Object Type">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Add</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="mapObj" class="tab-pane fade">
+                    <form name="addMap" ng-submit="AddmapInfo()">
+                        <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                            <h2 class="fRColor text-center">Map Object</h2>
+                            <hr />
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+
+
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Device ID:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <select class="form-control" name="devID" id="sel1" ng-model="ObjMap.deviceID" ng-options=" item.deviceID for item in deviceInfo track by item.deviceID" required></select>
+                                    <div ng-messages="addMap.devID.$error">
+									 <div ng-message="required"><font color="red">This field is required</font></div>
+									</div>
+									</div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">object ID:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <select class="form-control" name="objID" id="sel1" ng-model="ObjMap.objID" ng-options=" item.objID for item in objectInfo track by item.objID" required></select>
+                                    <div ng-messages="addMap.objID.$error">
+									 <div ng-message="required"><font color="red">This field is required</font></div>
+									</div>
+									</div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">User ID:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <select class="form-control" name="usrID" id="sel1" ng-model="ObjMap.userID" ng-options=" item.username for item in userInfo track by item.username" required></select>
+                                    <div ng-messages="addMap.usrID.$error">
+									 <div ng-message="required"><font color="red">This field is required</font></div>
+									</div>
+									</div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth" ng-disabled="addMap.$invalid">Add</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="addUser" class="tab-pane fade">
+                    <form name="usrInfo" ng-submit="AddUsrInfo()">
+                        <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                            <h2 class="fRColor text-center">Add User</h2>
+                            <hr />
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+
+
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="name" class="lblText">user ID</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="text" name="usrname" class="form-control" ng-model="usr.username" placeholder="User Id" required>
+                                    <div ng-messages="usrInfo.usrname.$error">
+									 <div ng-message="required"><font color="red">This field is required</font></div>
+									</div>
+								    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth" ng-disabled="usrInfo.$invalid">Add</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                            </div>
+                    </form>
+                </div>
+                
+                <div id="deall" class="tab-pane fade">
+                    <form name="rmDev" ng-submit="removeDev()">
+                        <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                            <h2 class="fRColor text-center">De-Allocate Device</h2>
+                            <hr />
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+
+
+                              <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Device ID:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <select class="form-control" name="sel" id="sel1" ng-model="dev.deviceID"   ng-options=" item.deviceID for item in devInfo track by item.deviceID" required></select>
+                                   <div ng-messages="rmDev.sel.$error">
+									 <div ng-message="required"><font color="red">This field is required</font></div>
+									</div>
+								    </div>
+									
+
+                                </div>
+
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth" ng-disabled="rmDev.$invalid">Remove</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</script>
+
+	<!--<script type="text/ng-template" id="/login.html">
+  <div class="page-header">
+    <h1>GPS Logger</h1>
+  </div>
+
+  <div ng-show="error" class="alert alert-danger row">
+    <span>{{ error.message }}</span>
+  </div>
+
+  <form ng-submit="logIn()"
+    style="margin-top:30px;">
+    <h3>Log In</h3>
+
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Username"
+      ng-model="user.username"></input>
+    </div>
+    <div class="form-group">
+      <input type="password"
+      class="form-control"
+      placeholder="Password"
+      ng-model="user.password"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+  </form>
+  </script>-->
+
+
+
+	 <script type="text/ng-template" id="/AdminHome.html">
+    <div class="container-fluid">
+        <div class="row titleBar">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 text-center">
+                GPS Tracker
+            </div>
+
+            <div class="col-sm-2 col-xs-2" style="padding-top: 4px; text-align: right;">
+                <i class="fa fa-power-off" ng-click="logOut()"></i>
+            </div>
+        </div>
+        <div class="col-sm-9 col-xs-12 mid no-padding">
+            <ul class="nav nav-pills tab-pills">
+                <li class="active"><a data-toggle="pill" href="#addCusto">Add Customer</a></li>
+                <li><a data-toggle="pill" href="#addDev">Add Device</a></li>
+                <li><a data-toggle="pill" href="#mapDev" ng-click="getInfo()" ng-init="getInfo()">Map Device</a></li>
+                <li><a data-toggle="pill" href="#fileupload">upload advertisement</a></li>
+            </ul>
+
+
+            <div class="tab-content">
+                <div id="addCusto" class="tab-pane fade in active">
+
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <form ng-submit="addCustomer()">
+                            <h2 class="fRColor text-center">Add Customer</h2>
+                            <hr />
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">Customer Email:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="email" class="form-control" ng-model="customer.customername" placeholder="Email">
+                                    </div>
+                                </div>
+                                <!--   <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="name" class="lblText">Password:</label>
+                                    </div>
+                                        <input type="password" class="form-control" ng-model="customer.password" placeholder="password">
+                                    </div>
+                                </div>-->
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <!--<a href="index.html" class="btn bgRColor fColor btnWidth">Add</a>-->
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Add</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div id="addDev" class="tab-pane fade">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Add Device</h2>
+                        <hr />
+                        <form ng-submit="addDevice()">
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">Device ID:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="text" class="form-control" ng-model="device.deviceID" placeholder="Device ID">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="name" class="lblText">Device Name:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="text" class="form-control" ng-model="device.deviceName" placeholder=" device name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Add</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div id="mapDev" class="tab-pane fade">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Map Device To Customer</h2>
+                        <hr />
+                        <form ng-submit="mapDevice()">
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Customer:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <select class="form-control" id="sel1" ng-model="map.username" ng-options=" item.username for item in customerInfo track by item.username"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="name" class="lblText">Device:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <select class="form-control" id="select1" ng-model="map.deviceID" ng-options="item.deviceID for item in deviceInfo track by item.deviceID"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Map</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="fileupload" class="tab-pane fade">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Upload advertisement</h2>
+                        <hr />
+                        <form ng-submit="upload()" enctype="multipart/form-data">
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Ad ID</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" ng-model="ad.adID" placeholder="Ad ID">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Location</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" ng-model="ad.location" placeholder="Location">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Click URL</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" ng-model="ad.url" placeholder="URL">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Choose file</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                       <!-- <input type="file" class="form-control"  onchange="angular.element(this).scope().fileup1()"   >-->
+									   <input type="file" class="form-control" file-model="myFile">
+                                    </div>
+                                </div>
+
+                               
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Map</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+</body>
+</html>

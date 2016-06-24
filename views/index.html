@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="css/Style.css" rel="stylesheet" />
+    <link href="css/bootstrap-3.3.4-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="css/font-awesome-4.3.0/css/font-awesome.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.js"></script>
+    <script src="css/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row titleBar">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 text-center">
+                GPS Tracker
+            </div>
+            <div class="col-sm-2 col-xs-2" style="padding-top: 4px; text-align: right;">
+                <i class="fa fa-power-off"></i>
+            </div>
+        </div>
+        <div class="col-sm-9 col-xs-12 mid no-padding">
+            <ul class="nav nav-pills tab-pills">
+                <li class="active"><a data-toggle="pill" href="#addCusto">Add Customer</a></li>
+                <li><a data-toggle="pill" href="#addDev">Add Device</a></li>
+                <li><a data-toggle="pill" href="#mapDev">Map Device</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="addCusto" class="tab-pane fade in active">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Add Customer</h2>
+                        <hr />
+                        <div class="col-sm-8 col-xs-12 mid no-padding">
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <div class="col-sm-6 col-xs-6 no-padding">
+                                    <label for="cEmail" class="lblText">Customer Email:</label>
+                                </div>
+                                <div class="col-sm-6 col-xs-6 no-padding">
+                                    <input type="email" class="form-control" id="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <div class="col-sm-6 col-xs-6 no-padding">
+                                    <label for="name" class="lblText">Password:</label>
+                                </div>
+                                <div class="col-sm-6 col-xs-6 no-padding">
+                                    <input type="pass" class="form-control" id="pass" placeholder="password">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 text-center form-group">
+                                <a href="index.html" class="btn bgRColor fColor btnWidth">Add</a>
+                                <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="addDev" class="tab-pane fade">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Add Device</h2>
+                        <hr />
+                        <div class="col-sm-8 col-xs-12 mid no-padding">
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <div class="col-sm-6 col-xs-6 no-padding">
+                                    <label for="cEmail" class="lblText">Device ID:</label>
+                                </div>
+                                <div class="col-sm-6 col-xs-6 no-padding">
+                                    <input type="number" class="form-control" id="dId" placeholder="Device ID">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <div class="col-sm-6 col-xs-6 no-padding">
+                                    <label for="name" class="lblText">Device Name:</label>
+                                </div>
+                                <div class="col-sm-6 col-xs-6 no-padding">
+                                    <input type="text" class="form-control" id="dName" placeholder="Device Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 text-center form-group">
+                                <a href="index.html" class="btn bgRColor fColor btnWidth">Add</a>
+                                <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mapDev" class="tab-pane fade">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Map Device To Customer</h2>
+                        <hr />
+                        <div class="col-sm-8 col-xs-12 mid no-padding">
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <div class="col-sm-6 col-xs-6">
+                                    <label for="cEmail" class="lblText">Customer:</label>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <select class="form-control" id="sel1">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <div class="col-sm-6 col-xs-6">
+                                    <label for="name" class="lblText">Device:</label>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <select class="form-control" id="Select1">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 text-center form-group">
+                                <a href="index.html" class="btn bgRColor fColor btnWidth">Add</a>
+                                <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

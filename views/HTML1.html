@@ -1,0 +1,176 @@
+﻿
+<script type="text/ng-template" id="/AdminHome.html">
+    <div class="container-fluid">
+        <div class="row titleBar">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 text-center">
+                GPS Tracker
+            </div>
+
+            <div class="col-sm-2 col-xs-2" style="padding-top: 4px; text-align: right;">
+                <i class="fa fa-power-off" ng-click="logOut()"></i>
+            </div>
+        </div>
+        <div class="col-sm-9 col-xs-12 mid no-padding">
+            <ul class="nav nav-pills tab-pills">
+                <li class="active"><a data-toggle="pill" href="#addCusto">Add Customer</a></li>
+                <li><a data-toggle="pill" href="#addDev">Add Device</a></li>
+                <li><a data-toggle="pill" href="#mapDev" ng-click="getInfo()" ng-init="getInfo()">Map Device</a></li>
+                <li><a data-toggle="pill" href="#fileupload">upload advertisement</a></li>
+            </ul>
+
+
+            <div class="tab-content">
+                <div id="addCusto" class="tab-pane fade in active">
+
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <form ng-submit="addCustomer()">
+                            <h2 class="fRColor text-center">Add Customer</h2>
+                            <hr />
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">Customer Email:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="email" class="form-control" ng-model="customer.customername" placeholder="Email">
+                                    </div>
+                                </div>
+                                <!--   <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="name" class="lblText">Password:</label>
+                                    </div>
+                                        <input type="password" class="form-control" ng-model="customer.password" placeholder="password">
+                                    </div>
+                                </div>-->
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <!--<a href="index.html" class="btn bgRColor fColor btnWidth">Add</a>-->
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Add</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div id="addDev" class="tab-pane fade">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Add Device</h2>
+                        <hr />
+                        <form ng-submit="addDevice()">
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="cEmail" class="lblText">Device ID:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="text" class="form-control" ng-model="device.deviceID" placeholder="Device ID">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <label for="name" class="lblText">Device Name:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6 no-padding">
+                                        <input type="text" class="form-control" ng-model="device.deviceName" placeholder=" device name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Add</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div id="mapDev" class="tab-pane fade">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Map Device To Customer</h2>
+                        <hr />
+                        <form ng-submit="mapDevice()">
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Customer:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <select class="form-control" id="sel1" ng-model="map.username" ng-options=" item.username for item in customerInfo track by item.username"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="name" class="lblText">Device:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <select class="form-control" id="select1" ng-model="map.deviceID" ng-options="item.deviceID for item in deviceInfo track by item.deviceID"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Map</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="fileupload" class="tab-pane fade">
+                    <div class="col-sm-12 col-xs-12 tabContainer no-padding">
+                        <h2 class="fRColor text-center">Upload advertisement</h2>
+                        <hr />
+                        <form ng-submit="mapDevice()" enctype="multipart/form-data">
+                            <div class="col-sm-8 col-xs-12 mid no-padding">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Ad ID</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" ng-model="ad.deviceName" placeholder="Ad ID">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Location</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" ng-model="ad.location" placeholder="Location">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Click URL</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" ng-model="ad.url" placeholder="URL">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="cEmail" class="lblText">Choose file</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <input type="file" class="form-control" ng-model="ad.url" placeholder="URL">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label for="name" class="lblText">Device:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <select class="form-control" id="select1" ng-model="map.deviceID" ng-options="item.deviceID for item in deviceInfo track by item.deviceID"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12 text-center form-group">
+                                    <button type="submit" class="btn bgRColor fColor btnWidth">Map</button>
+                                    <a href="index.html" class="btn bgRColor fColor btnWidth">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

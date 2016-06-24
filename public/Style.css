@@ -1,0 +1,89 @@
+﻿body {
+    font-family: 'Calibri',Segoe UI, sans-serif !important;
+}
+
+.mid {
+    margin: 0 auto !important;
+    float: none !important;
+}
+
+.titleBar {
+    padding: 4px 0;
+    background: #f23819;
+    font-size: 22px;
+    color: #fff;
+}
+
+.loginContent {
+    margin-top: 15%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bgColor {
+    background: #00aff0;
+}
+
+.bgRColor {
+    background: #f23819;
+}
+
+.fColor {
+    color: #fff;
+}
+
+.fRColor {
+    color: #f23819;
+}
+
+.fColor:hover {
+    color: #fff !important;
+}
+
+.tab-pills {
+    margin-top: 40px;
+}
+
+    .tab-pills > li > a {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .tab-pills > li.active > a, .tab-pills > li.active > a:hover, .tab-pills > li.active > a:focus {
+        color: #fff !important;
+        background-color: #f23819 !important;
+    }
+
+.tabContainer {
+    border: 1px solid silver;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.lblText {
+    font-size: 18px;
+    color: #666;
+}
+
+.btnWidth {
+    width: 100px;
+    margin:15px;
+}
+
+@media only screen and (max-width: 500px) {
+    .tab-pills > li > a {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .lblText {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .no-padding {
+        padding: 0 !important;
+    }
+}
