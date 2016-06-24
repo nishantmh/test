@@ -46,7 +46,7 @@ var Custmap_info = mongoose.model('custmap_info');
 var User_info = mongoose.model('user_info');
 
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {
-    mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
+    mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + "mongodb://localhost/gpstracker";
 }
 
 var app = express();
